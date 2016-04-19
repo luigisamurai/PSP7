@@ -13,37 +13,49 @@ public class Significancia {
 	private final double  CASUALIDAD = 0.2;	
 	
 	/*
+	* @Method: hallarIntervalo
+	* Description: halla el intervalo para el calculo de la significacia.
+	* Params: 
+	* 	r : valor de correlacion de los datos
+	* 	numeroDatos  : numero de datos
+	*/
+	public double hallarIntervalo(double correlacion, int numeroDatos){
+		double intervalo = ( Math.abs(correlacion) * Math.sqrt( numeroDatos - 2 )) / ( Math.sqrt( 1 - ( Math.pow( correlacion, 2) ) ) );
+		return intervalo;
+	}
+	
+	/*
+	* @Method: hallarTDistribuccion
+	* Description: halla la distribucion para el intervalo y numero de datos.
+	* Params: 
+	* 	intervalo :    Intervalo total a considerar para la distribucion
+	* 	numeroDatos  : numero de datos
+	*/
+	public double hallarTDistribuccion(double intervalo, int numeroDatos) throws Exception{
+		double probDist = new TDistrubution().distributionPgf(intervalo, 10, (double) numeroDatos-2 );
+		return probDist;
+	}
+	
+	/*
 	* @Method: obtenerSignificancia
 	* Description: Obtiene el valor de la significancia de un par de datos.
 	* Params: 
-	* 	r : valor de correlacion de los datos
-	* 	n  : numero de datos
-	* Return:  double: valor redondeado
+	* 	correlacion : valor de correlacion de los datos
+	* 	numeroDatos  : numero de datos
 	*/
-	public double obtenerSignificancia ( double r, int n) throws Exception{
-		double t = 0;
-		double probDist = 0;
-		double significancia = 0;
-		TDistrubution tDistrubution = new TDistrubution();
-		try{
-			t = Math.abs(r) * Math.sqrt(n -1) / Math.sqrt( 1 - (r * r) );
-			probDist = tDistrubution.distributionPgf(t, 10, (double) n-2 );
-			significancia = 1 - 2 * probDist;
-			return significancia;
-
-		}
-		catch(Exception e){
-			throw e;
-		}
-		
+	public double obtenerSignificancia ( double correlacion, int numeroDatos) throws Exception{
+		double intervalo = hallarIntervalo(correlacion, numeroDatos);
+		double tdistribuccion = hallarTDistribuccion(intervalo, numeroDatos);
+		double significancia = 1 - (2 * tdistribuccion);
+		return significancia;
 	}
+	
 	
 	/*
 	* @Method: obtenerSignificancia
 	* Description: Valida si el numero especificado como significancia es una relación..
 	* Params: 
 	* significancia: valor de la significancia
-	* Return:  double
 	*/
 	public Boolean EsRelacion( double significancia){
 		return significancia <= RELACION;

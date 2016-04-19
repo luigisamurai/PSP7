@@ -1,5 +1,7 @@
 package core.math;
 
+import java.text.DecimalFormat;
+
 import structures.Lista;
 import structures.Nodo;
 
@@ -215,8 +217,14 @@ public class Arithmetic {
 	*/
 	public static Double redondear(Double numero, int digitos)
 	{
+		/*
 	      int cifras=(int) Math.pow(10,digitos);
 	      return Math.rint(numero*cifras)/cifras;
+	    */
+		
+		Double cifras = Math.pow(10,digitos);
+		return (double) ( Math.rint( numero * cifras ) / cifras);
+		
 	}
 	
 	/*

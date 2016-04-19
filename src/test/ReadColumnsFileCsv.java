@@ -15,39 +15,37 @@ import structures.Lista;
 public class ReadColumnsFileCsv {
 	
 	private final String pathFileCsv = new File("bin/PSP_PGM07.csv").getAbsolutePath();
-	
 	private final String separatorFileCsv = ";";
-	
 	private final Files files = new Files();
-	
 	private Lista valuesExpected;
-	
 	private int indexX;
-	
 	private int indexY;
 
 	 @Before 
 	 public void initialize() {
-		 indexX = 0;
-		 indexY = 2;
 		 
-		 valuesExpected = new Lista();
-		 valuesExpected.add(130,186);
-		 valuesExpected.add(650,699);
-		 valuesExpected.add(99,132);
-		 valuesExpected.add(150,272);
-		 valuesExpected.add(128,291);
-		 valuesExpected.add(302,331);
-		 valuesExpected.add(95,199);
-		 valuesExpected.add(945,1890);
-		 valuesExpected.add(368,788);
-		 valuesExpected.add(961,1601);
      }
 	
 	@Test
-	public void getColumXAndY() {
+	public void getColumX0AndY2() {
 		Lista lista;
 		try {
+			
+			 indexX = 0;
+			 indexY = 2;
+			 
+			 valuesExpected = new Lista();
+			 valuesExpected.add(130,186);
+			 valuesExpected.add(650,699);
+			 valuesExpected.add(99,132);
+			 valuesExpected.add(150,272);
+			 valuesExpected.add(128,291);
+			 valuesExpected.add(302,331);
+			 valuesExpected.add(95,199);
+			 valuesExpected.add(945,1890);
+			 valuesExpected.add(368,788);
+			 valuesExpected.add(961,1601);
+			
 			lista = files.readColumns(pathFileCsv, indexX, indexY, separatorFileCsv);
 			for(int index = 0; index <valuesExpected.count(); index++){
 				Assert.assertEquals(valuesExpected.getAt(index).getValue().toString(), lista.getAt(index).getValue().toString());
