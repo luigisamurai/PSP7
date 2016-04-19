@@ -31,6 +31,7 @@ public class LinealRegresionTest {
 	
 	private Lista lista;
 	
+	
 	 @Before 
 	 public void initialize() throws Exception {
 		 estimate = 386;
