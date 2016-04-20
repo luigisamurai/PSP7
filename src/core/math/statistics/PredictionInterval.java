@@ -67,19 +67,24 @@ public class PredictionInterval extends LinealRegresion {
 	
 	public double getOmega(Lista lista, double bo, double b1){
 		Nodo nodo = null;
-		double sum = 0D;
+		Double sum = 0D;
+		Double value = 0D;
+		Double omega;
 		try{
 			
 			if(lista.count() > 0){
 				nodo = lista.getPrimerNodo();
 				do{
-					sum+= Double.parseDouble(nodo.getSecondValue().toString()) - bo - ( b1 * Double.parseDouble(nodo.getValue().toString()) );
+					value = Math.pow( (Double.parseDouble(nodo.getSecondValue().toString()) - bo) - ( b1 * Double.parseDouble(nodo.getValue().toString()) ), 2); 
+					sum+=  value;
+					System.out.println(value);
 					nodo = nodo.getNodoDerecho();
 				} while( nodo.getNodoDerecho() != null );
 			
 			}
 			
-			return sum;
+			omega = Math.sqrt(  1.0 / ( lista.count() - 2 )   * sum );
+			return omega;
 		}
 		catch(NumberFormatException e){
 			throw e;
