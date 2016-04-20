@@ -1,4 +1,6 @@
 
+import java.io.File;
+
 import core.io.Files;
 import core.math.Arithmetic;
 import core.math.statistics.LinealRegresion;
@@ -35,19 +37,22 @@ public class Main {
 		Files files = null;
 		try{
 			
-			ruta = args[0];
-			separator = args[1];
-			E  = Double.parseDouble(args[2]);
-			columns = new int[][]{{0,2},{0,3},{4,6},{4,7}};
+			ruta = new File("bin/PSP_PGM07.csv").getAbsolutePath();
+			separator = ";";
+			E  = Double.parseDouble(args[0]);
+			columns = new int[][]{{0,2},{0,3}};
 			
 			predInterval = new PredictionInterval();
+			
 			files = new Files();
 			
 			for (int i = 0; i < columns.length; i++) {
 				
 				lista = files.readColumns(ruta, columns[i][0], columns[i][1], separator);
-				significancia = new Significancia().obtenerSignificancia(predInterval.getCorrelacion1(), lista.count());
+				
 				predInterval.obtenerInterval(lista, E);
+				significancia = new Significancia().obtenerSignificancia(predInterval.getCorrelacion1(), lista.count());
+				
 				
 				System.out.println( 
 						Arithmetic.redondear(predInterval.getCorrelacion1(),digito) +  "\t\t" +

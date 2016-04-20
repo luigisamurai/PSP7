@@ -53,7 +53,7 @@ public class PredictionInterval extends LinealRegresion {
 			interval  = tDist.hallarSegmento(0.5, 0.35, n-2);
 			omega = getOmega(lista, getBetaSub0(), getBetaSub1());
 			avg = getAvgX();
-			sumDifDatisAvg = arit.sumDifDatosAvg(lista, avg, 0);
+			sumDifDatisAvg = arit.sumDifDatosAvg(lista, avg, 1);
 			range =  interval * omega * Math.sqrt( 1 + (1 / n) +  ( Math.pow(E - avg, 2) / sumDifDatisAvg ) );
 			upi = proxy + range;
 			lpi = proxy - range;
@@ -77,7 +77,6 @@ public class PredictionInterval extends LinealRegresion {
 				do{
 					value = Math.pow( (Double.parseDouble(nodo.getSecondValue().toString()) - bo) - ( b1 * Double.parseDouble(nodo.getValue().toString()) ), 2); 
 					sum+=  value;
-					System.out.println(value);
 					nodo = nodo.getNodoDerecho();
 				} while( nodo.getNodoDerecho() != null );
 			
