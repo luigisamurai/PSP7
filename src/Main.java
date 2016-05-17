@@ -46,6 +46,19 @@ public class Main {
 			
 			files = new Files();
 			
+			System.out.println( 
+					"r" +  "\t\t\t" +
+					"r*r" +  "\t\t\t" +
+					"Significance" +  "\t\t" +	
+					"B0" +  "\t\t\t" +
+					"B1" +  "\t\t\t" +
+					"P" +  "\t\t\t" +
+					"Range" +  "\t\t\t" +
+					"UPI" +  "\t\t\t" +
+					"LPI" +  "\t\t"
+		    );
+			
+			
 			for (int i = 0; i < columns.length; i++) {
 				
 				lista = files.readColumns(ruta, columns[i][0], columns[i][1], separator);
