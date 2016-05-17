@@ -16,6 +16,7 @@ public class TDistrubution {
 	 */
 	private final Double ACCEPT_ERROR = 0.0000001;
 	
+	
 	/*
 	* @Method: fxGama
 	* Description: formula fx aplicada a la distribucion
@@ -165,7 +166,7 @@ public class TDistrubution {
 					total =  0.0000001;
 				
 				pDistEspeculado = distributionPgf(total, intervalos, dof);
-				diferencia = arithmetic.redondear(pDistEspeculado -  pDistEsperado, 5);
+				diferencia = pDistEspeculado -  pDistEsperado;
 				
 				
 			

@@ -54,7 +54,7 @@ public class PredictionInterval extends LinealRegresion {
 			omega = getOmega(lista, getBetaSub0(), getBetaSub1());
 			avg = getAvgX();
 			sumDifDatisAvg = arit.sumDifDatosAvg(lista, avg, 1);
-			range =  interval * omega * Math.sqrt( 1 + (1.0 / n) +  ( Math.pow(E - avg, 2) / sumDifDatisAvg ) );
+			range =  interval * omega * Math.sqrt( ( 1 + (1.0 / n) ) +  ( (Math.pow(E - avg, 2)) / sumDifDatisAvg ) );
 			upi = proxy + range;
 			lpi = proxy - range;
 			
@@ -72,14 +72,16 @@ public class PredictionInterval extends LinealRegresion {
 		Double omega;
 		try{
 			
+
 			if(lista.count() > 0){
 				nodo = lista.getPrimerNodo();
 				do{
 					value = Math.pow( ( Double.parseDouble(nodo.getSecondValue().toString()) - bo ) - ( b1 * Double.parseDouble(nodo.getValue().toString()) ), 2); 
 					sum+=  value;
 					nodo = nodo.getNodoDerecho();
-				} while( nodo.getNodoDerecho() != null );
-			
+				} while( nodo!= null && nodo.getValue()!=null );
+				
+				
 			}
 			
 			omega = Math.sqrt(  (1.0 / ( lista.count() - 2 ))   * sum );
